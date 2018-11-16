@@ -9,7 +9,7 @@ import Delays from '../Pages/Delays'
 import '../css/App.css'
 // import Page from './Page'
 //import About from './About'
-import Footer from './Footer'
+// import Footer from './Footer'
 import Navbar from './Navbar'
 // import { getOeste } from '../actions/app';
 // import { store } from '../store'
@@ -37,7 +37,6 @@ class App extends Component {
           </TransitionGroup>
         )}
         />
-        <Footer />
       </main>
     )
   }
