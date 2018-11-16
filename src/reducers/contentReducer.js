@@ -3,26 +3,48 @@ import initialState from './initialState'
 
 export default function contentReducer(state = initialState.contentReducer, action) {
   switch (action.type) {
-    case types.FETCHING_CONTENT:
+    case types.FETCHING_LAST_SUPPRESSED:
       return {
         ...state,
-        errorFetchContent: false,
-        fetchingContent: true,
-        fetchedContent: undefined
+        errorFetchLastSuppressed: false,
+        fetchingLastSuppressed: true,
+        fetchedLastSuppressed: undefined
       }
-    case types.ERROR_FETCHING_CONTENT:
+    case types.ERROR_FETCHING_LAST_SUPPRESSED:
       return {
         ...state,
-        errorFetchContent: action.error,
-        fetchingContent: false,
-        fetchedContent: undefined
+        errorFetchLastSuppressed: action.error,
+        fetchingLastSuppressed: false,
+        fetchedLastSuppressed: undefined
       }
-    case types.FETCHED_CONTENT:
+    case types.FETCHED_LAST_SUPPRESSED:
       return {
         ...state,
-        errorFetchContent: false,
-        fetchingContent: false,
-        fetchedContent: action.response
+        errorFetchLastSuppressed: false,
+        fetchingLastSuppressed: false,
+        fetchedLastSuppressed: action.response
+      }
+    /* === */
+    case types.FETCHING_LAST_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        [`errorFetchLastSuppressedIn${action.location}`]: false,
+        [`fetchingLastSuppressedIn${action.location}`]: true,
+        [`fetchedLastSuppressedIn${action.location}`]: undefined
+      }
+    case types.ERROR_FETCHING_LAST_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        [`errorFetchLastSuppressedIn${action.location}`]: action.error,
+        [`fetchingLastSuppressedIn${action.location}`]: false,
+        [`fetchedLastSuppressedIn${action.location}`]: undefined
+      }
+    case types.FETCHED_LAST_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        [`errorFetchLastSuppressedIn${action.location}`]: false,
+        [`fetchingLastSuppressedIn${action.location}`]: false,
+        [`fetchedLastSuppressedIn${action.location}`]: action.response
       }
     default:
       return state
