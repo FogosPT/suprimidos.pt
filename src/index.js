@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/main.scss';
 import Header from './components/Header'
 import Container from './components/Container'
 import { BrowserRouter as Router } from "react-router-dom"
