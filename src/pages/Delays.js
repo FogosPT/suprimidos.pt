@@ -5,17 +5,17 @@ import * as contentActions from '../actions/contentActions'
 class Delays extends Component {
 
   componentWillMount() {
-    this.props.actions.getContent()
+    this.props.actions.getLastSuppressed()
   }
 
   render() {
-    this.props.fetchedContent && console.log(this.props.fetchedContent)
+    this.props.fetchedLastSuppressed && console.log(this.props.fetchedLastSuppressed)
 
     return (
       <div className="Delays">
-        {this.props.fetchingContent && <p>Loading</p>}
-        {this.props.errorFetchContent && <p>Error</p>}
-        {this.props.fetchedContent && <p>content here, check console.log</p>}
+        {this.props.fetchingLastSuppressed && <p>Loading</p>}
+        {this.props.errorFetchLastSuppressed && <p>Error</p>}
+        {this.props.fetchedLastSuppressed && <p>content here, check console.log</p>}
         <p>Delays</p>
       </div>
     )
@@ -30,9 +30,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    errorFetchContent: state.contentReducer.errorFetchContent,
-    fetchingContent: state.contentReducer.fetchingContent,
-    fetchedContent: state.contentReducer.fetchedContent,
+    errorFetchLastSuppressed: state.contentReducer.errorFetchLastSuppressed,
+    fetchingLastSuppressed: state.contentReducer.fetchingLastSuppressed,
+    fetchedLastSuppressed: state.contentReducer.fetchedLastSuppressed,
   }
 }
 
