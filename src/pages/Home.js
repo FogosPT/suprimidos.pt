@@ -32,10 +32,18 @@ class Home extends Component {
   }
 
   render() {
-    let lastSupression = moment("20111031").fromNow().trim()
-    let lastSupressionValue = parseInt(lastSupression)
-    let lastSupressionExpression = lastSupression.match(/[^\d]*/g)
-    let lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
+
+    let lastSupression
+    let lastSupressionValue = 0
+    let lastSupressionExpression
+    let lastSupressionLabel
+    if (this.props.fetchedLastSuppressed) {
+      lastSupression = moment.unix(this.props.fetchedLastSuppressed.timestamp).fromNow()
+      lastSupressionValue = parseInt(lastSupression)
+      lastSupressionExpression = lastSupression.match(/[^\d]*/g)
+      lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
+    }
+
 
     // this.props.fetchedLastSuppressedcascais && console.log('fetchedLastSuppressedcascais', this.props.fetchedLastSuppressedcascais)
     // this.props.fetchedLastSuppressedvouga && console.log('fetchedLastSuppressedvouga', this.props.fetchedLastSuppressedvouga)
