@@ -1,18 +1,16 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './pages/Home';
-import Notifications from './pages/Notifications';
-import Delays from './pages/Delays';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import Navbar from './components/Navbar'
+import Container from './components/Container'
+import { BrowserRouter as Router } from "react-router-dom"
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render((
   <Router>
     <Fragment>
-      <Route exact path="/" component={Home} />
-      <Route path="/notifications" component={Notifications} />
-      <Route path="/delays" component={Delays} />
+      <Navbar />
+      <Container />
     </Fragment>
   </Router>),
   document.getElementById('root'));
