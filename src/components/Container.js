@@ -9,7 +9,7 @@ import Notifications from "../pages/Notifications"
 
 function Container({ location }) {
   return (
-    <Wrapper>
+    <Wrapper className='main'>
       <TransitionGroup className="transition-group">
         <CSSTransition
           key={location.key}
@@ -19,8 +19,8 @@ function Container({ location }) {
           <section className="route-section">
             <Switch location={location}>
               <Route exact path="/" component={Home} />
-              <Route path="/notifications" component={Notifications} />
-              <Route path="/delays" component={Delays} />
+              <Route path="/notificacoes" component={Notifications} />
+              <Route path="/atrasos" component={Delays} />
             </Switch>
           </section>
         </CSSTransition>

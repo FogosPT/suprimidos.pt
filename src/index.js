@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Navbar from './components/Navbar'
+import Header from './components/Header'
 import Container from './components/Container'
 import { BrowserRouter as Router } from "react-router-dom"
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render((
   <Router>
     <Fragment>
-      <Navbar />
+      <Header />
       <Container />
     </Fragment>
   </Router>),
