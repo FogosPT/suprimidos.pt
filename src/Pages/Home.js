@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 //import Controls from './Controls'
 import Typography from '@material-ui/core/Typography'
 import Moment from 'react-moment'
+import { Link } from 'react-router-dom'
 import { app } from '../actions'
 import '../css/Home.css'
 //import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -51,6 +52,7 @@ class Home extends Component {
         {this.state.last ?
           <Moment unix>{this.state.last.timestamp}</Moment> : ''
         }
+        <Link to="/notificacao">Home</Link>
       </div>
     )
   }
