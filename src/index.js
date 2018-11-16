@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router-dom'
 import './css/index.css'
+import './css/Buttons.css'
 import { store, history } from './store'
 
 import App from './components/App'

@@ -1,23 +1,11 @@
 @import '_variables';
 
 .App {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
+  position: relative;  
   min-width: $breakpoint;
 
   > div {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%) scale(1);
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 $padding;
-    margin-top: $margin;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.01);
+    position: relative;
     transition: all $transitionSpeed ease;
 
     h2 {

@@ -9,7 +9,7 @@ class Notifications extends Component {
 
     return (
       <div className={aboutClass}>
-        <h2>About component</h2>
+        <h2>Notifications component</h2>
         <p>
           <span>Go to <Link to="/">Home</Link></span>
         </p>

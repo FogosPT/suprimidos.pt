@@ -5,7 +5,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 import Home from '../Pages/Home'
 import Notifications from '../Pages/Notifications'
-import Suprimidos from '../Pages/Suprimidos'
+import Delays from '../Pages/Delays'
 import '../css/App.css'
 // import Page from './Page'
 //import About from './About'
@@ -30,8 +30,8 @@ class App extends Component {
             >
               <Switch location={location}>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/delays" component={Delays} />
                 <Route exact path="/notifications" component={Notifications} />
-                <Route exact path="/suprimidos" component={Suprimidos} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
