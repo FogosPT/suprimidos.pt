@@ -1,0 +1,20 @@
+@import '_variables';
+
+.Controls {
+  margin: $margin 0;
+  border-top: 1px solid #ccc;
+
+  pre {
+    padding: $padding;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+
+  button {
+    margin-right: $margin / 2;
+    padding: $padding / 4;
+    font-size: 0.8em;
+    outline: none;
+  }
+}

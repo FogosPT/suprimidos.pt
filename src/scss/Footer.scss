@@ -1,0 +1,35 @@
+@import '_variables';
+
+.Footer {
+  position: absolute;
+  bottom: $margin;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all $transitionSpeed ease;
+  min-width: $breakpoint;
+  background-color: white;
+  padding: $padding;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.01);
+
+  @media screen and (max-width: $breakpoint) {
+    min-width: initial;
+    width: 100%;
+    bottom: 0;
+    border-radius: 0;
+  }
+
+  a {
+    float: right;
+  }
+
+  &.visible {
+    visibility: visible;
+    transform: translateX(-50%) translateY(0%);
+    opacity: 1;
+  }
+}
