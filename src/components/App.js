@@ -3,26 +3,22 @@ import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
-import '../css/App.css'
-
 import Home from './Home'
-import Page from './Page'
-import About from './About'
+import '../css/App.css'
+// import Page from './Page'
+// import About from './About'
 import Footer from './Footer'
 import Navbar from './Navbar'
-
-import { getOeste } from '../actions/app';
-
-import { store } from '../store'
+// import { getOeste } from '../actions/app';
+// import { store } from '../store'
 
 class App extends Component {
-  
   render() {
     const appClass = classNames('App', {})
 
     return (
       <main>
-      <Navbar />
+        <Navbar />
 
         <Route render={({ location }) => (
           <TransitionGroup className={appClass}>

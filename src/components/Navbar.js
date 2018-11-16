@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import classNames from 'classnames'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import '../css/Home.css'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
 
 class Navbar extends Component {
   render() {
@@ -13,14 +12,14 @@ class Navbar extends Component {
 
     return (
       <div className={homeClass}>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit">
-            Suprimidos
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <Typography variant="h6" color="inherit">
+              Suprimidos
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
     )
   }
 }

@@ -8,8 +8,6 @@ import { store, history } from './store'
 
 import App from './components/App'
 
-
-
 const router = (
   <Provider store={store}>
     <ConnectedRouter history={history}>
