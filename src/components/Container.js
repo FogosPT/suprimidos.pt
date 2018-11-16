@@ -9,21 +9,23 @@ import Notifications from "../pages/Notifications"
 
 function Container({ location }) {
   return (
-    <TransitionGroup className="transition-group">
-      <CSSTransition
-        key={location.key}
-        timeout={{ enter: 300, exit: 300 }}
-        classNames="fade"
-      >
-        <section className="main route-section">
-          <Switch location={location}>
-            <Route exact path="/" component={Home} />
-            <Route path="/notificacoes" component={Notifications} />
-            <Route path="/atrasos" component={Delays} />
-          </Switch>
-        </section>
-      </CSSTransition>
-    </TransitionGroup>
+    <Wrapper>
+      <TransitionGroup className="transition-group">
+        <CSSTransition
+          key={location.key}
+          timeout={{ enter: 300, exit: 300 }}
+          classNames="fade"
+        >
+          <section className="main route-section">
+            <Switch location={location}>
+              <Route exact path="/" component={Home} />
+              <Route path="/notificacoes" component={Notifications} />
+              <Route path="/atrasos" component={Delays} />
+            </Switch>
+          </section>
+        </CSSTransition>
+      </TransitionGroup>
+    </Wrapper>
   );
 }
 
