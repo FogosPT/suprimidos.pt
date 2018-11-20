@@ -1,0 +1,104 @@
+{
+  "locations": [
+    {
+      "key": "sintra",
+      "value": "Sintra"
+    },
+    {
+      "key": "minho",
+      "value": "Minho"
+    },
+    {
+      "key": "braga",
+      "value": "Braga"
+    },
+    {
+      "key": "oeste",
+      "value": "Oeste"
+    },
+    {
+      "key": "beiraAlta",
+      "value": "BeiraAlta"
+    },
+    {
+      "key": "cascais",
+      "value": "Cascais"
+    },
+    {
+      "key": "tomar",
+      "value": "Tomar"
+    },
+    {
+      "key": "norte",
+      "value": "Norte"
+    },
+    {
+      "key": "douro",
+      "value": "Douro"
+    },
+    {
+      "key": "guimaraes",
+      "value": "Guimarães"
+    },
+    {
+      "key": "beiraBaixa",
+      "value": "Beira Baixa"
+    },
+    {
+      "key": "cintura",
+      "value": "Cintura"
+    },
+    {
+      "key": "algarve",
+      "value": "Algarve"
+    },
+    {
+      "key": "casaBranca",
+      "value": "Casa Branca"
+    },
+    {
+      "key": "sado",
+      "value": "Sado"
+    },
+    {
+      "key": "evora",
+      "value": "Ẽvora"
+    },
+    {
+      "key": "aveiro",
+      "value": "Aveiro"
+    },
+    {
+      "key": "fertagus",
+      "value": "Fertagus"
+    },
+    {
+      "key": "especial",
+      "value": "Especial"
+    },
+    {
+      "key": "soporcel",
+      "value": "Soporcel"
+    },
+    {
+      "key": "carga",
+      "value": "Carga"
+    },
+    {
+      "key": "areia",
+      "value": "Areia"
+    },
+    {
+      "key": "cimento",
+      "value": "Cimento"
+    },
+    {
+      "key": "madeira",
+      "value": "Madeira"
+    },
+    {
+      "key": "carvao",
+      "value": "Carvão"
+    }
+  ]
+}

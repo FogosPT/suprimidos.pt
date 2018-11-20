@@ -6,19 +6,14 @@ import 'moment-timezone';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as contentActions from '../actions/contentActions'
+import Loc from '../locations.json'
 
-const LOCATIONS = ['sintra','algarve', 'beiraAlta',
-                   'cascais','vouga', 'leste',
-                   'beiraBaixa', 'oeste', 'minho',
-                   'braga', 'guimaraes', 'douro',
-                   'tua', 'norte', 'cintura',
-                   'alentejo', 'evora', 'sul']
 class Home extends Component {
 
   componentWillMount() {
     this.props.actions.getLastSuppressed()
-    for(let location of LOCATIONS){
-      this.props.actions.getLastSuppressedByLocation(location)
+    for (let location of Loc.locations) {
+      this.props.actions.getLastSuppressedByLocation(location.key)
     }
   }
 
@@ -36,33 +31,6 @@ class Home extends Component {
   }
 
   render() {
-
-    // available lines:
-    // 'sintra',
-    // 'minho',
-    // 'braga',
-    // 'oeste',
-    // 'beiraAlta',
-    // 'cascais',
-    // 'tomar',
-    // 'norte',
-    // 'douro',
-    // 'guimaraes',
-    // 'beiraBaixa',
-    // 'cintura',
-    // 'algarve',
-    // 'casaBranca',
-    // 'sado',
-    // 'evora',
-    // 'aveiro',
-    // 'fertagus',
-    // 'especial',
-    // 'soporcel',
-    // 'carga',
-    // 'areia',
-    // 'cimento',
-    // 'madeira',
-    // 'carvao',
 
     let lastSupression
     let lastSupressionValue = 0
