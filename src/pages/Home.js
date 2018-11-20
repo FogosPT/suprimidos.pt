@@ -31,6 +31,22 @@ class Home extends Component {
     this.props.actions.getLastSuppressedByLocation('algarve')
   }
 
+  returnDateFormated(date) {
+    let lastSupression
+    let lastSupressionValue = 0
+    let lastSupressionExpression
+    let lastSupressionLabel
+    lastSupression = moment.unix(date).fromNow()
+    console.log(lastSupression)
+    lastSupressionValue = parseInt(lastSupression)
+    lastSupressionExpression = lastSupression.match(/[^\d]*/g)
+    console.log(lastSupressionExpression)
+    lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
+
+    console.log(lastSupressionValue)
+    return [lastSupressionValue, lastSupressionLabel];
+  }
+
   render() {
 
     let lastSupression
@@ -42,6 +58,22 @@ class Home extends Component {
       lastSupressionValue = parseInt(lastSupression)
       lastSupressionExpression = lastSupression.match(/[^\d]*/g)
       lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
+    }
+
+    let sintraLast = 0
+    if (this.props.fetchedLastSuppressedsintra) {
+      sintraLast = [this.props.fetchedLastSuppressedsintra.timestamp]
+      sintraLast.push(this.props.fetchedLastSuppressedsintra.line)
+      sintraLast.push(this.props.fetchedLastSuppressedsintra.type)
+      sintraLast.push(this.props.fetchedLastSuppressedsintra.vendor)
+    }
+
+    let algarveLast = 0
+    if (this.props.fetchedLastSuppressedalgarve) {
+      algarveLast = [this.props.fetchedLastSuppressedalgarve.timestamp]
+      algarveLast.push(this.props.fetchedLastSuppressedalgarve.line)
+      algarveLast.push(this.props.fetchedLastSuppressedalgarve.type)
+      algarveLast.push(this.props.fetchedLastSuppressedalgarve.vendor)
     }
 
 
@@ -70,7 +102,7 @@ class Home extends Component {
             <Col xs={12}>
               <Card>
                 <Card.Body className="text-center">
-                  <h1>O último comboio suprimido foi à
+                  <h1>O último comboio suprimido foi há &nbsp;
                     <CountUp
                       start={0}
                       end={lastSupressionValue}
@@ -82,42 +114,29 @@ class Home extends Component {
                   <Table responsive>
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
+                        <th>Linha</th>
+                        <th>Último</th>
+                        <th>Linha</th>
+                        <th>Tipo</th>
+                        <th>Operador</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>1</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
+                        <td>Sintra</td>
+                        <td>{moment.unix(sintraLast[0]).fromNow()}</td>
+                        <td>{sintraLast[1]}</td>
+                        <td>{sintraLast[2]}</td>
+                        <td>{sintraLast[3]}</td>
+                        <td>{sintraLast[4]}</td>
                       </tr>
                       <tr>
-                        <td>2</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
+                        <td>Algarve</td>
+                        <td>{moment.unix(algarveLast[0]).fromNow()}</td>
+                        <td>{algarveLast[1]}</td>
+                        <td>{algarveLast[2]}</td>
+                        <td>{algarveLast[3]}</td>
+                        <td>{algarveLast[4]}</td>
                       </tr>
                     </tbody>
                   </Table>
