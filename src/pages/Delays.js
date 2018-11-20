@@ -45,6 +45,9 @@ class Delays extends Component {
     return (
       <tr key={location.key}>
         <td>{location.value}</td>
+        <td>{content.max} min</td>
+        <td>{content.min} min</td>
+        <td>{content.totalDelay} min</td>
         <td>{moment.unix(content.timestamp).fromNow()}</td>
         <td>{content.type}</td>
         <td>{content.vendor}</td>
@@ -89,6 +92,9 @@ class Delays extends Component {
                     <thead>
                       <tr>
                         <th>Linha</th>
+                        <th>Maior</th>
+                        <th>Menor</th>
+                        <th>Total</th>
                         <th>Último</th>
                         <th>Tipo</th>
                         <th>Operador</th>
