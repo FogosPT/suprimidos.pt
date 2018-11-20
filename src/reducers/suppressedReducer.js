@@ -46,6 +46,28 @@ export default function suppressedReducer(state = initialState.suppressedReducer
         [`fetchingLastSuppressedIn${action.location}`]: false,
         [`fetchedLastSuppressedIn${action.location}`]: action.response
       }
+      /* === */
+    case types.FETCHING_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
+    return {
+      ...state,
+      [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
+      [`fetchingLastWeeksSuppressedIn${action.location}`]: true,
+      [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
+    }
+  case types.ERROR_FETCHING_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
+    return {
+      ...state,
+      [`errorFetchLastWeeksSuppressedIn${action.location}`]: action.error,
+      [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
+      [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
+    }
+  case types.FETCHED_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
+    return {
+      ...state,
+      [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
+      [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
+      [`fetchedLastWeeksSuppressedIn${action.location}`]: action.response
+    }
     default:
       return state
   }
