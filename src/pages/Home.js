@@ -49,6 +49,33 @@ class Home extends Component {
 
   render() {
 
+    // available lines:
+    // 'sintra',
+    // 'minho',
+    // 'braga',
+    // 'oeste',
+    // 'beiraAlta',
+    // 'cascais',
+    // 'tomar',
+    // 'norte',
+    // 'douro',
+    // 'guimaraes',
+    // 'beiraBaixa',
+    // 'cintura',
+    // 'algarve',
+    // 'casaBranca',
+    // 'sado',
+    // 'evora',
+    // 'aveiro',
+    // 'fertagus',
+    // 'especial',
+    // 'soporcel',
+    // 'carga',
+    // 'areia',
+    // 'cimento',
+    // 'madeira',
+    // 'carvao',
+
     let lastSupression
     let lastSupressionValue = 0
     let lastSupressionExpression
@@ -114,7 +141,7 @@ class Home extends Component {
                   <Table responsive>
                     <thead>
                       <tr>
-                        <th>Linha</th>
+j                        <th>Linha</th>
                         <th>Último</th>
                         <th>Linha</th>
                         <th>Tipo</th>

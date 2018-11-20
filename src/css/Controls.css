@@ -1,0 +1,13 @@
+.Controls {
+  margin: 20px 0;
+  border-top: 1px solid #ccc; }
+  .Controls pre {
+    padding: 20px;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+    overflow-x: auto; }
+  .Controls button {
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 0.8em;
+    outline: none; }
