@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Card, Table } from 'react-bootstrap'
+import { Container, Row, Col, Card, Table, Jumbotron } from 'react-bootstrap'
 import CountUp from 'react-countup';
 import moment from 'moment'
 import 'moment-timezone';
@@ -66,20 +66,24 @@ class Home extends Component {
 
     return (
       <div className="Home">
+        <Jumbotron fluid>
+          <Container>
+            <h1 className="text-center">O último comboio suprimido foi há &nbsp;
+              <CountUp
+                start={0}
+                end={lastSupressionValue}
+                duration={3}
+                delay={0.5}
+              />
+              {lastSupressionLabel}
+            </h1>
+          </Container>
+        </Jumbotron>
         <Container>
           <Row>
             <Col xs={12}>
               <Card>
                 <Card.Body className="text-center">
-                  <h1>O último comboio suprimido foi há &nbsp;
-                    <CountUp
-                      start={0}
-                      end={lastSupressionValue}
-                      duration={3}
-                      delay={0.5}
-                    />
-                    {lastSupressionLabel}
-                  </h1>
                   <Table responsive>
                     <thead>
                       <tr>
