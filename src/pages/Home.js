@@ -7,32 +7,19 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as contentActions from '../actions/contentActions'
 
+const LOCATIONS = ['sintra','algarve', 'beiraAlta',
+                   'cascais','vouga', 'leste',
+                   'beiraBaixa', 'oeste', 'minho',
+                   'braga', 'guimaraes', 'douro',
+                   'tua', 'norte', 'cintura',
+                   'alentejo', 'evora', 'sul']
 class Home extends Component {
 
   componentWillMount() {
     this.props.actions.getLastSuppressed()
-    this.props.actions.getLastSuppressedByLocation('sintra')
-    this.props.actions.getLastSuppressedByLocation('algarve')
-    this.props.actions.getLastSuppressedByLocation('beiraAlta')
-
-    this.props.actions.getLastSuppressedByLocation('cascais')
-    this.props.actions.getLastSuppressedByLocation('vouga')
-    this.props.actions.getLastSuppressedByLocation('leste')
-    
-    this.props.actions.getLastSuppressedByLocation('beiraBaixa')
-    this.props.actions.getLastSuppressedByLocation('oeste')
-    
-    this.props.actions.getLastSuppressedByLocation('minho')
-    this.props.actions.getLastSuppressedByLocation('braga')
-    this.props.actions.getLastSuppressedByLocation('guimaraes')
-    this.props.actions.getLastSuppressedByLocation('douro')
-    this.props.actions.getLastSuppressedByLocation('tua')
-    this.props.actions.getLastSuppressedByLocation('norte')
-    this.props.actions.getLastSuppressedByLocation('cintura')
-    this.props.actions.getLastSuppressedByLocation('alentejo')
-    this.props.actions.getLastSuppressedByLocation('evora')
-    this.props.actions.getLastSuppressedByLocation('sul')
-
+    for(let location of LOCATIONS){
+      this.props.actions.getLastSuppressedByLocation(location)
+    }
   }
 
   returnDateFormated(date) {
@@ -105,7 +92,7 @@ class Home extends Component {
     }
 
     let beiraAltaLast = 0
-    if (this.props.fetchedLastSuppressedalgarve) {
+    if (this.props.fetchedLastSuppressedbeiraAlta) {
       beiraAltaLast = [this.props.fetchedLastSuppressedbeiraAlta.timestamp]
       beiraAltaLast.push(this.props.fetchedLastSuppressedbeiraAlta.line)
       beiraAltaLast.push(this.props.fetchedLastSuppressedbeiraAlta.type)
