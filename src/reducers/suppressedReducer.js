@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes'
 import initialState from './initialState'
 
-export default function contentReducer(state = initialState.contentReducer, action) {
+export default function suppressedReducer(state = initialState.suppressedReducer, action) {
   switch (action.type) {
     case types.FETCHING_LAST_SUPPRESSED:
       return {

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import contentReducer from './contentReducer'
+import suppressedReducer from './suppressedReducer'
+import delayedReducer from './delayedReducer'
 
 const rootReducer = combineReducers({
-  contentReducer
+  suppressedReducer,
+  delayedReducer
 })
 
 export default rootReducer

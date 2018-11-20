@@ -5,7 +5,7 @@ import moment from 'moment'
 import 'moment-timezone';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as contentActions from '../actions/contentActions'
+import * as suppressedActions from '../actions/suppressedActions'
 import Loc from '../locations.json'
 
 class Home extends Component {
@@ -34,8 +34,8 @@ class Home extends Component {
   handleLines() {
     let allLines = []
     for (let location of Loc.locations) {
-      if (this.props.allContent[`fetchedLastSuppressedIn${location.key}`]) {
-        allLines = [...allLines, this.renderLine(location, this.props.allContent[`fetchedLastSuppressedIn${location.key}`])]
+      if (this.props.allSuppressedContent[`fetchedLastSuppressedIn${location.key}`]) {
+        allLines = [...allLines, this.renderLine(location, this.props.allSuppressedContent[`fetchedLastSuppressedIn${location.key}`])]
       }
     }
     return allLines
@@ -58,8 +58,8 @@ class Home extends Component {
     let lastSupressionValue = 0
     let lastSupressionExpression
     let lastSupressionLabel
-    if (this.props.allContent.fetchedLastSuppressed) {
-      lastSupression = moment.unix(this.props.allContent.fetchedLastSuppressed.timestamp).fromNow()
+    if (this.props.allSuppressedContent.fetchedLastSuppressed) {
+      lastSupression = moment.unix(this.props.allSuppressedContent.fetchedLastSuppressed.timestamp).fromNow()
       lastSupressionValue = parseInt(lastSupression)
       lastSupressionExpression = lastSupression.match(/[^\d]*/g)
       lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
@@ -106,13 +106,13 @@ class Home extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...contentActions }, dispatch)
+    actions: bindActionCreators({ ...suppressedActions }, dispatch)
   }
 }
 
 function mapStateToProps(state) {
   return {
-    allContent: state.contentReducer,
+    allSuppressedContent: state.suppressedReducer,
   }
 }
 
