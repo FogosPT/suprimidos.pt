@@ -11,6 +11,7 @@ import Loc from '../locations.json'
 class Home extends Component {
 
   componentWillMount() {
+    // API Calls
     this.props.actions.getLastSuppressed()
     for (let location of Loc.locations) {
       this.props.actions.getLastSuppressedByLocation(location.key)
@@ -57,8 +58,8 @@ class Home extends Component {
     let lastSupressionValue = 0
     let lastSupressionExpression
     let lastSupressionLabel
-    if (this.props.fetchedLastSuppressed) {
-      lastSupression = moment.unix(this.props.fetchedLastSuppressed.timestamp).fromNow()
+    if (this.props.allContent.fetchedLastSuppressed) {
+      lastSupression = moment.unix(this.props.allContent.fetchedLastSuppressed.timestamp).fromNow()
       lastSupressionValue = parseInt(lastSupression)
       lastSupressionExpression = lastSupression.match(/[^\d]*/g)
       lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
@@ -111,12 +112,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-
     allContent: state.contentReducer,
-
-    errorFetchLastSuppressed: state.contentReducer.errorFetchLastSuppressed,
-    fetchingLastSuppressed: state.contentReducer.fetchingLastSuppressed,
-    fetchedLastSuppressed: state.contentReducer.fetchedLastSuppressed,
   }
 }
 
