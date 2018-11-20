@@ -11,13 +11,17 @@ class Home extends Component {
 
   componentWillMount() {
     this.props.actions.getLastSuppressed()
+    this.props.actions.getLastSuppressedByLocation('sintra')
+    this.props.actions.getLastSuppressedByLocation('algarve')
+    this.props.actions.getLastSuppressedByLocation('beiraAlta')
+
     this.props.actions.getLastSuppressedByLocation('cascais')
     this.props.actions.getLastSuppressedByLocation('vouga')
     this.props.actions.getLastSuppressedByLocation('leste')
-    this.props.actions.getLastSuppressedByLocation('beiraAlta')
+    
     this.props.actions.getLastSuppressedByLocation('beiraBaixa')
     this.props.actions.getLastSuppressedByLocation('oeste')
-    this.props.actions.getLastSuppressedByLocation('sintra')
+    
     this.props.actions.getLastSuppressedByLocation('minho')
     this.props.actions.getLastSuppressedByLocation('braga')
     this.props.actions.getLastSuppressedByLocation('guimaraes')
@@ -28,7 +32,7 @@ class Home extends Component {
     this.props.actions.getLastSuppressedByLocation('alentejo')
     this.props.actions.getLastSuppressedByLocation('evora')
     this.props.actions.getLastSuppressedByLocation('sul')
-    this.props.actions.getLastSuppressedByLocation('algarve')
+
   }
 
   returnDateFormated(date) {
@@ -37,13 +41,10 @@ class Home extends Component {
     let lastSupressionExpression
     let lastSupressionLabel
     lastSupression = moment.unix(date).fromNow()
-    console.log(lastSupression)
     lastSupressionValue = parseInt(lastSupression)
     lastSupressionExpression = lastSupression.match(/[^\d]*/g)
-    console.log(lastSupressionExpression)
     lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
 
-    console.log(lastSupressionValue)
     return [lastSupressionValue, lastSupressionLabel];
   }
 
@@ -103,6 +104,13 @@ class Home extends Component {
       algarveLast.push(this.props.fetchedLastSuppressedalgarve.vendor)
     }
 
+    let beiraAltaLast = 0
+    if (this.props.fetchedLastSuppressedalgarve) {
+      beiraAltaLast = [this.props.fetchedLastSuppressedbeiraAlta.timestamp]
+      beiraAltaLast.push(this.props.fetchedLastSuppressedbeiraAlta.line)
+      beiraAltaLast.push(this.props.fetchedLastSuppressedbeiraAlta.type)
+      beiraAltaLast.push(this.props.fetchedLastSuppressedbeiraAlta.vendor)
+    }
 
     // this.props.fetchedLastSuppressedcascais && console.log('fetchedLastSuppressedcascais', this.props.fetchedLastSuppressedcascais)
     // this.props.fetchedLastSuppressedvouga && console.log('fetchedLastSuppressedvouga', this.props.fetchedLastSuppressedvouga)
@@ -141,7 +149,7 @@ class Home extends Component {
                   <Table responsive>
                     <thead>
                       <tr>
-j                        <th>Linha</th>
+                        <th>Linha</th>
                         <th>Último</th>
                         <th>Linha</th>
                         <th>Tipo</th>
@@ -164,6 +172,14 @@ j                        <th>Linha</th>
                         <td>{algarveLast[2]}</td>
                         <td>{algarveLast[3]}</td>
                         <td>{algarveLast[4]}</td>
+                      </tr>
+                      <tr>
+                        <td>Beira Alta</td>
+                        <td>{moment.unix(beiraAltaLast[0]).fromNow()}</td>
+                        <td>{beiraAltaLast[1]}</td>
+                        <td>{beiraAltaLast[2]}</td>
+                        <td>{beiraAltaLast[3]}</td>
+                        <td>{beiraAltaLast[4]}</td>
                       </tr>
                     </tbody>
                   </Table>
