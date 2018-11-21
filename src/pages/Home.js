@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Card, Table, Jumbotron } from 'react-bootstrap'
 import CountUp from 'react-countup';
 import moment from 'moment'
-import 'moment-timezone';
+import 'moment-timezone'
+import 'moment/locale/pt'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as suppressedActions from '../actions/suppressedActions'
@@ -18,17 +19,35 @@ class Home extends Component {
     }
   }
 
-  returnDateFormated(date) {
+  handleTimeToAnimate(date) {
     let lastSupression
-    let lastSupressionValue = 0
-    let lastSupressionExpression
-    let lastSupressionLabel
-    lastSupression = moment.unix(date).fromNow()
-    lastSupressionValue = parseInt(lastSupression)
-    lastSupressionExpression = lastSupression.match(/[^\d]*/g)
-    lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
+    let numberValue = false
+    let prefixString = 'há muito'
+    let SufixString = 'tempo'
+    if (this.props.allSuppressedContent.fetchedLastSuppressed) {
+      lastSupression = moment.unix(this.props.allSuppressedContent.fetchedLastSuppressed.timestamp).fromNow()
+      let prefixExp = /^\D*/
+      let sufixExp = /\w*$/
+      let numberValueExp = /\d+/g
+      if (lastSupression.match(prefixExp)[0]) {
+        prefixString = lastSupression.match(prefixExp)[0]
+      }
+      if (lastSupression.match(sufixExp)[0]) {
+        SufixString = lastSupression.match(sufixExp)[0]
+      }
+      if (lastSupression.match(numberValueExp) && lastSupression.match(numberValueExp)[0]) {
+        numberValue = parseInt(lastSupression.match(numberValueExp)[0])
+      }
+      // If the first string has the substring we just render the prefix
+      if (prefixString.includes(SufixString)) {
+        SufixString = ''
+      }
+      // console.log('SufixString', SufixString)
+      // console.log('prefixString', prefixString)
+      // console.log('numberValue', numberValue)
+    }
 
-    return [lastSupressionValue, lastSupressionLabel];
+    return { numberValue, prefixString, SufixString: ` ${SufixString}` }
   }
 
   handleLines() {
@@ -53,30 +72,20 @@ class Home extends Component {
   }
 
   render() {
-
-    let lastSupression
-    let lastSupressionValue = 0
-    let lastSupressionExpression
-    let lastSupressionLabel
-    if (this.props.allSuppressedContent.fetchedLastSuppressed) {
-      lastSupression = moment.unix(this.props.allSuppressedContent.fetchedLastSuppressed.timestamp).fromNow()
-      lastSupressionValue = parseInt(lastSupression)
-      lastSupressionExpression = lastSupression.match(/[^\d]*/g)
-      lastSupressionLabel = lastSupressionExpression.filter(word => word !== '')
-    }
-
+    moment.locale('pt')
+    let { numberValue, prefixString, SufixString } = this.handleTimeToAnimate()
     return (
       <div className="Home">
         <Jumbotron fluid>
           <Container>
-            <h1 className="text-center">O último comboio suprimido foi há &nbsp;
-              <CountUp
+            <h1 className="text-center">O último comboio suprimido foi {prefixString}
+              {numberValue && <CountUp
                 start={0}
-                end={lastSupressionValue}
+                end={numberValue}
                 duration={3}
                 delay={0.5}
-              />
-              {lastSupressionLabel}
+              />}
+              {SufixString}
             </h1>
           </Container>
         </Jumbotron>
