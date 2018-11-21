@@ -68,10 +68,25 @@ class Home extends Component {
       <tr key={location.key}>
         <td>{location.value}</td>
         {content.map((item, index) => (
-            <td key={index}>{item.count}</td>
+            <td key={index}>{this.renderCount(item.count)}</td>
         ))}
       </tr>
     )
+  }
+
+  renderCount(count) {
+    if(count){
+      let randomStart = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
+
+      return  <CountUp
+          start={randomStart}
+          end={parseInt(count,10)}
+          duration={4}
+          delay={1}
+        />
+    } else {
+        return <i class="fas fa-check-circle"></i>
+    }
   }
 
   render() {
