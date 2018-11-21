@@ -13,7 +13,7 @@ class Header extends React.Component {
             <Nav>
               <Nav><Link className='nav-link' to="/">Home</Link></Nav>
               <Nav><Link className='nav-link' to="/atrasos">Atrasos</Link></Nav>
-              <Nav><Link className='nav-link' to="/notificacoes">Notificações</Link></Nav>
+              {/* <Nav><Link className='nav-link' to="/notificacoes">Notificações</Link></Nav> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
