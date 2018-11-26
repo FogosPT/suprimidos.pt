@@ -18,6 +18,37 @@ class Delays extends Component {
     }
   }
 
+  handleTimeToAnimate() {
+    let lastDelay
+    let numberValue = false
+    let prefixString = 'há muito'
+    let SufixString = 'tempo'
+    if (this.props.allDelayedContent.fetchedLastDelayed) {
+      lastDelay = moment.unix(this.props.allDelayedContent.fetchedLastDelayed.timestamp).fromNow()
+      let prefixExp = /^\D*/
+      let sufixExp = /\w*$/
+      let numberValueExp = /\d+/g
+      if (lastDelay.match(prefixExp)[0]) {
+        prefixString = lastDelay.match(prefixExp)[0]
+      }
+      if (lastDelay.match(sufixExp)[0]) {
+        SufixString = lastDelay.match(sufixExp)[0]
+      }
+      if (lastDelay.match(numberValueExp) && lastDelay.match(numberValueExp)[0]) {
+        numberValue = parseInt(lastDelay.match(numberValueExp)[0])
+      }
+      // If the first string has the substring we just render the prefix
+      if (prefixString.includes(SufixString)) {
+        SufixString = ''
+      }
+      // console.log('SufixString', SufixString)
+      // console.log('prefixString', prefixString)
+      // console.log('numberValue', numberValue)
+    }
+
+    return { numberValue, prefixString, SufixString: ` ${SufixString}` }
+  }
+
   returnDateFormated(date) {
     let lastDelay
     let lastDelayValue = 0
@@ -56,30 +87,21 @@ class Delays extends Component {
   }
 
   render() {
-
-    let lastDelay
-    let lastDelayValue = 0
-    let lastDelayExpression
-    let lastDelayLabel
-    if (this.props.allDelayedContent.fetchedLastDelayed) {
-      lastDelay = moment.unix(this.props.allDelayedContent.fetchedLastDelayed.timestamp).fromNow()
-      lastDelayValue = parseInt(lastDelay)
-      lastDelayExpression = lastDelay.match(/[^\d]*/g)
-      lastDelayLabel = lastDelayExpression.filter(word => word !== '')
-    }
+    moment.locale('pt')
+    let { numberValue, prefixString, SufixString } = this.handleTimeToAnimate()
 
     return (
       <div className="Home">
         <Jumbotron fluid>
           <Container>
-            <h1 className="text-center">O último comboio atrasado foi há &nbsp;
-              <CountUp
+            <h1 className="text-center">O último comboio atrasado foi {prefixString}
+              {numberValue && <CountUp
                 start={0}
-                end={lastDelayValue}
+                end={numberValue}
                 duration={3}
                 delay={0.5}
-              />
-              {lastDelayLabel}
+              />}
+              {SufixString}
             </h1>
           </Container>
         </Jumbotron>
