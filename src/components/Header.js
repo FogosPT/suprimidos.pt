@@ -14,6 +14,7 @@ class Header extends React.Component {
               <Nav><Link className='nav-link' to="/">Home</Link></Nav>
               <Nav><Link className='nav-link' to="/atrasos">Atrasos</Link></Nav>
               {/* <Nav><Link className='nav-link' to="/notificacoes">Notificações</Link></Nav> */}
+              <Nav><a className='nav-link' href="https://twitter.com/suprimidospt" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a></Nav>
             </Nav>
           </Navbar.Collapse>
         </Container>
