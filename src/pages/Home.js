@@ -104,11 +104,7 @@ class Home extends Component {
         delay={1}
       />
     } else {
-<<<<<<< HEAD
         return <i className="fas fa-check-circle"></i>
-=======
-      return <i className="fas fa-check-circle"></i>
->>>>>>> 6c856f0861bbae80a650300b8976ec4ce57625b2
     }
   }
 
