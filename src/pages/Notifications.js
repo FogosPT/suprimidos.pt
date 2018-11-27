@@ -1,23 +1,12 @@
 import React, { Component } from 'react'
 import Toggle from 'react-toggle'
-import { Container, Row, Col, Card, Table, Jumbotron } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import Loc from '../locations.json'
 import firebase from "firebase";
 
 class Notifications extends Component {
   componentWillMount() {
-    let config = {
-      apiKey: "AIzaSyA4-Smy2VEb5N2R004jkUyk3waFO9sLFo0",
-      authDomain: "suprimidos-95969.firebaseapp.com",
-      databaseURL: "https://suprimidos-95969.firebaseio.com",
-      projectId: "suprimidos-95969",
-      storageBucket: "suprimidos-95969.appspot.com",
-      messagingSenderId: "741950318441"
-    };
-
-    console.log(config)
-    firebase.initializeApp(config);
-    this.initializePush()
+    
   }
 
   initializePush() {
@@ -81,25 +70,100 @@ class Notifications extends Component {
     } else {
       localStorage.setItem('not-' + e.target.value, false)
     }
+
+    this.sendEvent(e.target.value)
+  }
+
+  renderNotificationNotSupported() {
+    return(
+      <div className="row no-auth is-not-supported">
+                <div className="card col-12">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-12">
+                                <p>O seu browser não suporta notificações :'(</p>
+                                <p>Experimente usar o <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a> ou o <a href="https://www.mozilla.org/en-US/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    )
   }
 
   handleNotifications() {
-    let allNotifications = []
-    for (let location of Loc.locations) {
-      allNotifications = [...allNotifications, this.renderToggle(location)]
+    let tokenFB = localStorage.getItem('tokenFB')
+
+    if(tokenFB){
+      let allNotifications = []
+      for (let location of Loc.locations) {
+        allNotifications = [...allNotifications, this.renderToggle(location)]
+      }
+      return allNotifications
     }
-    return allNotifications
+
+    return(
+      <div className="row no-auth is-supported">
+      <div className="card">
+          <div className="card-body">
+              <div className="row">
+                  <div className="col-12 col-sm-5 col-md-6">
+                      <p>Para receber notificações de novos comboios suprimidos, clique no
+                          botão ao lado para iniciar a autorização.</p>
+                  </div>
+                  <div className="col-12 col-sm-7 col-md-6">
+                      <button onClick={() => { this.startFirebase() }} type="button"
+                              className="btn btn-outline-success btn-lg btn-block">Quero
+                          receber notificações.
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    )
+  }
+
+  startFirebase() {
+    let config = {
+      apiKey: "AIzaSyA4-Smy2VEb5N2R004jkUyk3waFO9sLFo0",
+      authDomain: "suprimidos-95969.firebaseapp.com",
+      databaseURL: "https://suprimidos-95969.firebaseio.com",
+      projectId: "suprimidos-95969",
+      storageBucket: "suprimidos-95969.appspot.com",
+      messagingSenderId: "741950318441"
+    };
+    
+    firebase.initializeApp(config);
+    this.initializePush()
   }
 
   bool(v) { return v === "false" || v === "null" || v === "NaN" || v === "undefined" || v === "0" ? false : !!v; }
 
+  handleWhatToRender() {
+    if(!window.PushManager || document.documentMode || /Edge/.test(navigator.userAgent)){
+      return this.renderNotificationNotSupported();
+    }
+
+    return this.handleNotifications()
+  }
+
+  sendEvent(line) {
+    if (window.ga) {
+        if ("ga" in window) {
+            var tracker = window.ga.getAll()[0];
+            if (tracker)
+                tracker.send("event", line, '', "click", '');
+        }
+    }
+}
 
   render() {
     return (
       <div className="Notifications">
         <Container>
           <h1>Notificações</h1>
-          {this.handleNotifications()}
+          {this.handleWhatToRender()}
         </Container>
       </div>
     )
