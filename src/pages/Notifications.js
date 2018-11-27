@@ -14,7 +14,7 @@ class Notifications extends Component {
       storageBucket: "suprimidos-95969.appspot.com",
       messagingSenderId: "741950318441"
     };
-    
+
     console.log(config)
     firebase.initializeApp(config);
     this.initializePush()
@@ -23,30 +23,31 @@ class Notifications extends Component {
   initializePush() {
     const messaging = firebase.messaging();
     messaging
-       .requestPermission()
-       .then(() => {
-          console.log("Have Permission");
-          return messaging.getToken();
-        })
-       .then(token => {
-          console.log("FCM Token:", token);
-          //you probably want to send your new found FCM token to the
-          //application server so that they can send any push
-          //notification to you.
-        })
-       .catch(error => {
-          if (error.code === "messaging/permission-blocked") {
-             console.log("Please Unblock Notification Request Manually");
-          } else {
-             console.log("Error Occurred", error);
-          }
-         });
- }
+      .requestPermission()
+      .then(() => {
+        console.log("Have Permission");
+        return messaging.getToken();
+      })
+      .then(token => {
+        console.log("FCM Token:", token);
+        localStorage.setItem('tokenFB', token)
+        //you probably want to send your new found FCM token to the
+        //application server so that they can send any push
+        //notification to you.
+      })
+      .catch(error => {
+        if (error.code === "messaging/permission-blocked") {
+          console.log("Please Unblock Notification Request Manually");
+        } else {
+          console.log("Error Occurred", error);
+        }
+      });
+  }
 
   renderToggle(location) {
     let status = localStorage.getItem('not-' + location.key)
 
-    return(
+    return (
       <Row key={location.key}>
         <label>
           <Toggle
@@ -60,8 +61,23 @@ class Notifications extends Component {
   }
 
   handleNotificationChange(e) {
-    if(e.target.checked){
+    if (e.target.checked) {
       localStorage.setItem('not-' + e.target.value, true)
+      const request = new Request(`https://tomahock.com/cenas/suprimidos/notifications.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        })
+      })
+      return fetch(request).then(response => {
+        if (response.status === 200) {
+          console.log(response)
+        }
+        return response.json().then(response => { throw (response) })
+      }).catch(error => {
+        throw (error)
+      })
     } else {
       localStorage.setItem('not-' + e.target.value, false)
     }
@@ -75,7 +91,7 @@ class Notifications extends Component {
     return allNotifications
   }
 
-  bool(v){ return v==="false" || v==="null" || v==="NaN" || v==="undefined" || v==="0" ? false : !!v; }
+  bool(v) { return v === "false" || v === "null" || v === "NaN" || v === "undefined" || v === "0" ? false : !!v; }
 
 
   render() {
