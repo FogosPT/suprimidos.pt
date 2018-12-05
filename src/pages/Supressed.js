@@ -44,12 +44,12 @@ class Supressed extends Component {
             {
               cols.map((train, idx) => {
                 return (
-                  <Col md="4">
+                  <Col key={idx} md="4">
                     <Card key={idx}>
                       <Card.Body>
-                        <h3>{train.begin}</h3>
-                        <h3>{train.end}</h3>
-                        <p>{train.line}</p>
+                        <h4>{train.begin} <span className="text-small">({train.startTime})</span></h4>
+                        <h4>{train.end} <span className="text-small">({train.endTime})</span></h4>
+                        <p>{train.line} - {train.type} - {train.vendor}</p>
                         <p>{moment.unix(train.timestamp).fromNow()}</p>
                       </Card.Body>
                     </Card>
@@ -65,7 +65,6 @@ class Supressed extends Component {
 
   render() {
     const locationUri = this.props.match
-    console.log(this.props.fetchedAllSupressedByLocation)
     return (
       <div className="Home">
         <Jumbotron fluid>

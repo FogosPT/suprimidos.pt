@@ -61,7 +61,7 @@ class Notifications extends Component {
       })
       return fetch(request).then(response => {
         if (response.status === 200) {
-          console.log(response)
+          
         }
         return response.json().then(response => { throw (response) })
       }).catch(error => {
@@ -83,6 +83,30 @@ class Notifications extends Component {
     )
   }
 
+  clearNotifications() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  renderNotificationTroubleshoting() {
+    return(
+      <section key={1} className="bg-white">
+          <div className="card col-12">
+              <div className="card-body">
+                  <div className="row">
+                      <div className="col-12">
+                          <h3>Problemas com as notificações?</h3>
+                          <button type="button"
+                                  onClick={() => { this.clearNotifications() }}
+                                  className="btn btn-outline-success btn-lg btn-block js-notifications-reset">Clique Aqui</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+    )
+  }
+
   handleNotifications() {
     let tokenFB = localStorage.getItem('tokenFB')
 
@@ -91,6 +115,8 @@ class Notifications extends Component {
       for (let location of Loc.locations) {
         allNotifications = [...allNotifications, this.renderToggle(location)]
       }
+
+      allNotifications = [...allNotifications, this.renderNotificationTroubleshoting()]
       return allNotifications
     }
 
@@ -124,6 +150,8 @@ class Notifications extends Component {
 
     firebase.initializeApp(config);
     this.initializePush()
+
+    setTimeout(function(){window.location.reload()},1000);
   }
 
   bool(v) { return v === "false" || v === "null" || v === "NaN" || v === "undefined" || v === "0" ? false : !!v; }

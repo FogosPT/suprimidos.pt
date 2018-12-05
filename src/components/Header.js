@@ -15,7 +15,7 @@ class Header extends React.Component {
               <Nav><Link className='nav-link' to="/atrasos">Atrasos</Link></Nav>
               <Nav><Link className='nav-link' to="/notificacoes">Notificações</Link></Nav>
               <Nav><a className='nav-link' href="https://twitter.com/suprimidospt" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a></Nav>
-              <Nav><a className='nav-link' href="https://play.google.com/apps/testing/com.tomahock.suprimidos" target="_blank" rel="noopener noreferrer"><i className="fab fa-android"></i></a></Nav>
+              <Nav><a className='nav-link' href="https://play.google.com/store/apps/details?id=com.tomahock.suprimidos" target="_blank" rel="noopener noreferrer"><i className="fab fa-android"></i></a></Nav>
               <Nav><LinkWithTooltip tooltip={<span>Brevemente</span>} href="#" id="tooltip"><i className="fab fa-apple"></i></LinkWithTooltip></Nav>
               <Nav><a className='nav-link' href="https://github.com/fogospt/suprimidos.pt" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a></Nav>
             </Nav>
