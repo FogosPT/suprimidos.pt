@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Card, Table, Jumbotron } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import CountUp from 'react-countup';
 import moment from 'moment'
 import 'moment-timezone'
@@ -64,7 +65,7 @@ class Home extends Component {
   renderLine(location, content) {
     return (
       <tr key={location.key}>
-        <td>{location.value}</td>
+        <td><Link to={`/suprimidos/${location.key}`}>{location.value}</Link></td>
         <td>{moment.unix(content.timestamp).fromNow()}</td>
         <td>{content.type}</td>
         <td>{content.vendor}</td>
@@ -104,7 +105,7 @@ class Home extends Component {
         delay={1}
       />
     } else {
-        return <i className="fas fa-check-circle"></i>
+      return <i className="fas fa-check-circle"></i>
     }
   }
 

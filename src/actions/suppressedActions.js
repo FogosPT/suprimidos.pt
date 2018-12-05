@@ -106,3 +106,52 @@ export function getLastWeeksSuppressedByLocation(location) {
     })
   }
 }
+
+/** ------------------------------------- */
+
+export function fetchingAllSuppressedByLocation(location) {
+  return {
+    type: types.FETCHING_ALL_SUPPRESSED_BY_LOCATION,
+    location
+  }
+}
+
+export function errorFetchingAllSuppressedByLocation(error, location) {
+  return {
+    type: types.ERROR_FETCHING_ALL_SUPPRESSED_BY_LOCATION,
+    error,
+    location
+  }
+}
+
+export function fetchedAllSuppressedByLocation(response, location) {
+  return {
+    type: types.FETCHED_ALL_SUPPRESSED_BY_LOCATION,
+    location,
+    response
+  }
+}
+
+export function getAllSuppressedByLocation(location) {
+  return dispatch => {
+    dispatch(fetchingAllSuppressedByLocation(location))
+    return contentApi.allSuppressedByLocation(location).then(response => {
+      dispatch(fetchedAllSuppressedByLocation(response, location))
+    }).catch(error => {
+      dispatch(errorFetchingAllSuppressedByLocation(error, location))
+      throw (error)
+    })
+  }
+}
+
+export function clearAllSuppressedByLocation() {
+  return {
+    type: types.CLEAR_ALL_SUPPRESSED_BY_LOCATION
+  }
+}
+
+export function cleanAllSupressedByLocation() {
+  return dispatch => {
+    dispatch(clearAllSuppressedByLocation())
+  }
+}

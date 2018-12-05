@@ -25,6 +25,35 @@ export default function suppressedReducer(state = initialState.suppressedReducer
         fetchedLastSuppressed: action.response
       }
     /* === */
+    case types.FETCHING_ALL_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        errorFetchAllSupressedByLocation: false,
+        fetchingAllSupressedByLocation: true,
+        fetchedAllSupressedByLocation: undefined
+      }
+    case types.ERROR_FETCHING_ALL_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        errorFetchAllSupressedByLocation: action.error,
+        fetchingAllSupressedByLocation: false,
+        fetchedAllSupressedByLocation: undefined
+      }
+    case types.FETCHED_ALL_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        fetchingAllSupressedByLocation: false,
+        errorFetchAllSupressedByLocation: false,
+        fetchedAllSupressedByLocation: action.response
+      }
+    case types.CLEAR_ALL_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        fetchingAllSupressedByLocation: false,
+        errorFetchAllSupressedByLocation: false,
+        fetchedAllSupressedByLocation: undefined
+      }
+    /* === */
     case types.FETCHING_LAST_SUPPRESSED_BY_LOCATION:
       return {
         ...state,
@@ -46,28 +75,28 @@ export default function suppressedReducer(state = initialState.suppressedReducer
         [`fetchingLastSuppressedIn${action.location}`]: false,
         [`fetchedLastSuppressedIn${action.location}`]: action.response
       }
-      /* === */
+    /* === */
     case types.FETCHING_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
-    return {
-      ...state,
-      [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
-      [`fetchingLastWeeksSuppressedIn${action.location}`]: true,
-      [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
-    }
-  case types.ERROR_FETCHING_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
-    return {
-      ...state,
-      [`errorFetchLastWeeksSuppressedIn${action.location}`]: action.error,
-      [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
-      [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
-    }
-  case types.FETCHED_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
-    return {
-      ...state,
-      [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
-      [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
-      [`fetchedLastWeeksSuppressedIn${action.location}`]: action.response
-    }
+      return {
+        ...state,
+        [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
+        [`fetchingLastWeeksSuppressedIn${action.location}`]: true,
+        [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
+      }
+    case types.ERROR_FETCHING_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        [`errorFetchLastWeeksSuppressedIn${action.location}`]: action.error,
+        [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
+        [`fetchedLastWeeksSuppressedIn${action.location}`]: undefined
+      }
+    case types.FETCHED_LAST_WEEKS_SUPPRESSED_BY_LOCATION:
+      return {
+        ...state,
+        [`errorFetchLastWeeksSuppressedIn${action.location}`]: false,
+        [`fetchingLastWeeksSuppressedIn${action.location}`]: false,
+        [`fetchedLastWeeksSuppressedIn${action.location}`]: action.response
+      }
     default:
       return state
   }
