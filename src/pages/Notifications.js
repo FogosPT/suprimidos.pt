@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Toggle from 'react-toggle'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Jumbotron } from 'react-bootstrap'
 import Loc from '../locations.json'
 import firebase from "firebase";
 
 class Notifications extends Component {
   componentWillMount() {
-    
+
   }
 
   initializePush() {
@@ -75,26 +75,18 @@ class Notifications extends Component {
   }
 
   renderNotificationNotSupported() {
-    return(
-      <div className="row no-auth is-not-supported">
-                <div className="card col-12">
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-12">
-                                <p>O seu browser não suporta notificações :'(</p>
-                                <p>Experimente usar o <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a> ou o <a href="https://www.mozilla.org/en-US/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    return (
+      <div className="no-auth is-not-supported">
+        <p>O seu browser não suporta notificações :'(</p>
+        <p>Experimente usar o <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a> ou o <a href="https://www.mozilla.org/en-US/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>!</p>
+      </div>
     )
   }
 
   handleNotifications() {
     let tokenFB = localStorage.getItem('tokenFB')
 
-    if(tokenFB){
+    if (tokenFB) {
       let allNotifications = []
       for (let location of Loc.locations) {
         allNotifications = [...allNotifications, this.renderToggle(location)]
@@ -102,25 +94,21 @@ class Notifications extends Component {
       return allNotifications
     }
 
-    return(
-      <div className="row no-auth is-supported">
-      <div className="card">
-          <div className="card-body">
-              <div className="row">
-                  <div className="col-12 col-sm-5 col-md-6">
-                      <p>Para receber notificações de novos comboios suprimidos, clique no
-                          botão ao lado para iniciar a autorização.</p>
-                  </div>
-                  <div className="col-12 col-sm-7 col-md-6">
-                      <button onClick={() => { this.startFirebase() }} type="button"
-                              className="btn btn-outline-success btn-lg btn-block">Quero
-                          receber notificações.
-                      </button>
-                  </div>
-              </div>
+    return (
+      <div className="no-auth is-supported">
+        <div className="row">
+          <div className="col-12">
+            <p className="text-center">Para receber notificações de novos comboios suprimidos, clique no
+                  botão ao lado para iniciar a autorização.</p>
           </div>
+          <div className="col-12">
+            <button onClick={() => { this.startFirebase() }} type="button"
+              className="btn btn-outline-success btn-lg btn-block">Quero
+          receber notificações.
+              </button>
+          </div>
+        </div>
       </div>
-  </div>
     )
   }
 
@@ -133,7 +121,7 @@ class Notifications extends Component {
       storageBucket: "suprimidos-95969.appspot.com",
       messagingSenderId: "741950318441"
     };
-    
+
     firebase.initializeApp(config);
     this.initializePush()
   }
@@ -141,7 +129,7 @@ class Notifications extends Component {
   bool(v) { return v === "false" || v === "null" || v === "NaN" || v === "undefined" || v === "0" ? false : !!v; }
 
   handleWhatToRender() {
-    if(!window.PushManager || document.documentMode || /Edge/.test(navigator.userAgent)){
+    if (!window.PushManager || document.documentMode || /Edge/.test(navigator.userAgent)) {
       return this.renderNotificationNotSupported();
     }
 
@@ -150,21 +138,23 @@ class Notifications extends Component {
 
   sendEvent(line) {
     if (window.ga) {
-        if ("ga" in window) {
-            var tracker = window.ga.getAll()[0];
-            if (tracker)
-                tracker.send("event", line, '', "click", '');
-        }
+      if ("ga" in window) {
+        var tracker = window.ga.getAll()[0];
+        if (tracker)
+          tracker.send("event", line, '', "click", '');
+      }
     }
-}
+  }
 
   render() {
     return (
       <div className="Notifications">
-        <Container>
-          <h1>Notificações</h1>
-          {this.handleWhatToRender()}
-        </Container>
+        <Jumbotron fluid>
+          <Container>
+            <h1 className="text-center">Notificações</h1>
+            {this.handleWhatToRender()}
+          </Container>
+        </Jumbotron>
       </div>
     )
   }
