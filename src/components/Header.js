@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { Container, Navbar, Nav, OverlayTrigger,Tooltip } from 'react-bootstrap'
+import { Container, Navbar, Nav, OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 class Header extends React.Component {
   render() {
     return (
       <Navbar expand="lg" fixed="top" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>Suprimidos</Navbar.Brand>
+          <Navbar.Brand><Link to="/">Suprimidos</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse>
             <Nav>

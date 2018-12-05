@@ -14,3 +14,12 @@ code {
 .main{
   margin-top: 56px;
 }
+
+.navbar-brand{
+  a{
+    color: inherit;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
