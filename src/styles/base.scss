@@ -14,3 +14,7 @@ code {
 .main{
   margin-top: 56px;
 }
+
+.row+.row {
+  margin-top: 25px;
+}
