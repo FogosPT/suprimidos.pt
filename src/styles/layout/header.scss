@@ -1,6 +1,16 @@
-.navbar-collapse{
-  >.navbar-nav{
-    justify-content: flex-end;
-    width: 100%;
+.navbar{
+  .navbar-brand{
+    a{
+      color: inherit;
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
-}
+  .navbar-collapse{
+    >.navbar-nav{
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+} 

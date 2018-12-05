@@ -30,28 +30,32 @@ export default function suppressedReducer(state = initialState.suppressedReducer
         ...state,
         errorFetchAllSupressedByLocation: false,
         fetchingAllSupressedByLocation: true,
-        fetchedAllSupressedByLocation: undefined
+        fetchedAllSupressedByLocation: undefined,
+        locationAllSupressed: action.location
       }
     case types.ERROR_FETCHING_ALL_SUPPRESSED_BY_LOCATION:
       return {
         ...state,
         errorFetchAllSupressedByLocation: action.error,
         fetchingAllSupressedByLocation: false,
-        fetchedAllSupressedByLocation: undefined
+        fetchedAllSupressedByLocation: undefined,
+        locationAllSupressed: action.location
       }
     case types.FETCHED_ALL_SUPPRESSED_BY_LOCATION:
       return {
         ...state,
         fetchingAllSupressedByLocation: false,
         errorFetchAllSupressedByLocation: false,
-        fetchedAllSupressedByLocation: action.response
+        fetchedAllSupressedByLocation: action.response,
+        locationAllSupressed: action.location,
       }
     case types.CLEAR_ALL_SUPPRESSED_BY_LOCATION:
       return {
         ...state,
         fetchingAllSupressedByLocation: false,
         errorFetchAllSupressedByLocation: false,
-        fetchedAllSupressedByLocation: undefined
+        fetchedAllSupressedByLocation: undefined,
+        locationAllSupressed: undefined
       }
     /* === */
     case types.FETCHING_LAST_SUPPRESSED_BY_LOCATION:
