@@ -73,32 +73,8 @@
       "value": "Fertagus"
     },
     {
-      "key": "especial",
-      "value": "Especial"
-    },
-    {
-      "key": "soporcel",
-      "value": "Soporcel"
-    },
-    {
-      "key": "carga",
-      "value": "Carga"
-    },
-    {
-      "key": "areia",
-      "value": "Areia"
-    },
-    {
-      "key": "cimento",
-      "value": "Cimento"
-    },
-    {
-      "key": "madeira",
-      "value": "Madeira"
-    },
-    {
-      "key": "carvao",
-      "value": "Carvão"
+      "key": "outros",
+      "value": "Outros"
     }
   ]
 }
