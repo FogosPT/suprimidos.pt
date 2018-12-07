@@ -65,11 +65,12 @@ class Supressed extends Component {
 
   render() {
     const locationUri = this.props.match
+    
     return (
       <div className="Home">
         <Jumbotron fluid>
           <Container>
-            <h1 className="text-center">Comboios suprimidos para: {locationUri.params.location}</h1>
+          <button className="btn btn-sm" onClick={this.props.history.goBack}><i className="fas fa-arrow-alt-circle-left"></i> Voltar</button><h1 className="text-center">Comboios suprimidos para: {locationUri.params.location}</h1>
           </Container>
         </Jumbotron>
         <Container>

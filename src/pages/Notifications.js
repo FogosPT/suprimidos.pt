@@ -42,7 +42,7 @@ class Notifications extends Component {
           <Toggle
             defaultChecked={this.bool(status)}
             value={location.key}
-            onChange={this.handleNotificationChange} />
+            onChange={(e) => {this.handleNotificationChange(e)}} />
           <span> {location.value}</span>
         </label>
       </Row>
@@ -50,6 +50,8 @@ class Notifications extends Component {
   }
 
   handleNotificationChange(e) {
+    this.sendEvent(e.target.value)
+
     if (e.target.checked) {
       localStorage.setItem('not-' + e.target.value, true)
       const request = new Request(`https://tomahock.com/cenas/suprimidos/notifications.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
@@ -69,9 +71,25 @@ class Notifications extends Component {
       })
     } else {
       localStorage.setItem('not-' + e.target.value, false)
+
+      const request = new Request(`https://tomahock.com/cenas/suprimidos/notifications-u.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        })
+      })
+      return fetch(request).then(response => {
+        if (response.status === 200) {
+          
+        }
+        return response.json().then(response => { throw (response) })
+      }).catch(error => {
+        throw (error)
+      })
     }
 
-    this.sendEvent(e.target.value)
+    
   }
 
   renderNotificationNotSupported() {
@@ -169,7 +187,7 @@ class Notifications extends Component {
       if ("ga" in window) {
         var tracker = window.ga.getAll()[0];
         if (tracker)
-          tracker.send("event", line, '', "click", '');
+          tracker.send("event", line, '1', "click", '2');
       }
     }
   }

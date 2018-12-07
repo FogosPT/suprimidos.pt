@@ -65,7 +65,7 @@ class Home extends Component {
   renderLine(location, content) {
     return (
       <tr key={location.key}>
-        <td><Link to={`/suprimidos/${location.key}`}>{location.value}</Link></td>
+        <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-train"></i> {location.value}</Link></td>
         <td>{moment.unix(content.timestamp).fromNow()}</td>
         <td>{content.type}</td>
         <td>{content.vendor}</td>
