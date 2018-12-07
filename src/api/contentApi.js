@@ -1,7 +1,7 @@
 class contentApi {
 
   static lastSuppressed() {
-    const request = new Request('https://tomahock.com/cenas/suprimidos/data.php?last=1', {
+    const request = new Request('https://api.suprimidos.pt/data.php?last=1', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ class contentApi {
   }
 
   static lastDelayed() {
-    const request = new Request('https://tomahock.com/cenas/suprimidos/data.php?delay=1', {
+    const request = new Request('https://api.suprimidos.pt/data.php?delay=1', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ class contentApi {
   }
 
   static lastSuppressedByLocation(location) {
-    const request = new Request(`https://tomahock.com/cenas/suprimidos/data.php?line=${location}`, {
+    const request = new Request(`https://api.suprimidos.pt/data.php?line=${location}`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ class contentApi {
   }
 
   static lastDelayedByLocation(location) {
-    const request = new Request(`https://tomahock.com/cenas/suprimidos/data.php?lineDelay=${location}`, {
+    const request = new Request(`https://api.suprimidos.pt/data.php?lineDelay=${location}`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ class contentApi {
   }
 
   static lastSuppressedLastWeeksByLocation(location) {
-    const request = new Request(`https://tomahock.com/cenas/suprimidos/data.php?lineWeek=${location}`, {
+    const request = new Request(`https://api.suprimidos.pt/data.php?lineWeek=${location}`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class contentApi {
   }
 
   static allSuppressedByLocation(location) {
-    const request = new Request(`https://tomahock.com/cenas/suprimidos/data.php?lineLast=${location}`, {
+    const request = new Request(`https://api.suprimidos.pt/data.php?lineLast=${location}`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

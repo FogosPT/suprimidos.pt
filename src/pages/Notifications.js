@@ -54,7 +54,7 @@ class Notifications extends Component {
 
     if (e.target.checked) {
       localStorage.setItem('not-' + e.target.value, true)
-      const request = new Request(`https://tomahock.com/cenas/suprimidos/notifications.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
+      const request = new Request(`https://api.suprimidos.pt/notifications.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
         method: 'GET',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ class Notifications extends Component {
     } else {
       localStorage.setItem('not-' + e.target.value, false)
 
-      const request = new Request(`https://tomahock.com/cenas/suprimidos/notifications-u.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
+      const request = new Request(`https://api.suprimidos.pt/notifications-u.php?topic=${e.target.value}&token=${localStorage.getItem('tokenFB')}`, {
         method: 'GET',
         headers: new Headers({
           'Content-Type': 'application/json',
