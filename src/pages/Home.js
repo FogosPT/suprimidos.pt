@@ -12,12 +12,44 @@ import Loc from '../locations.json'
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      totalSuppressed: 0,
+    }
+  }
+
   componentWillMount() {
     // API Calls
     this.props.actions.getLastSuppressed()
     for (let location of Loc.locations) {
       this.props.actions.getLastSuppressedByLocation(location.key)
       this.props.actions.getLastWeeksSuppressedByLocation(location.key)
+
+      console.log(this.props.allSuppressedContent[`fetchedLastSuppressedIn${location.key}`])
+    }
+  }
+
+  
+
+  componentDidUpdate() {
+    let total = 0
+    let missing = false
+    for (let location of Loc.locations) {
+      
+      let data = this.props.allSuppressedContent[`fetchedLastWeeksSuppressedIn${location.key}`]
+      
+      if(typeof data === 'undefined'){
+        missing = true
+      } else {
+        for(let i in data){
+          total += data[i].count
+        }
+      }
+    }
+
+    if( !missing && !this.state.totalSuppressed){
+       this.setState({...this.state, totalSuppressed: total})
     }
   }
 
@@ -69,6 +101,7 @@ class Home extends Component {
         <td>{moment.unix(content.timestamp).fromNow()}</td>
         <td>{content.type}</td>
         <td>{content.vendor}</td>
+        <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-link"></i></Link></td>
       </tr>
     )
   }
@@ -95,7 +128,7 @@ class Home extends Component {
   }
 
   renderCount(count) {
-    if (count) {
+    if (count) {  
       let randomStart = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
 
       return <CountUp
@@ -136,9 +169,10 @@ class Home extends Component {
                     <thead>
                       <tr>
                         <th>Linha</th>
-                        <th>Último</th>
+                        <th>Último Suprimido</th>
                         <th>Tipo</th>
                         <th>Operador</th>
+                        <th>Ver todos</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -150,6 +184,13 @@ class Home extends Component {
             </Col>
           </Row>
         </Container>
+
+        <Jumbotron fluid className="mt-5">
+          <Container>
+          <h2 className="text-center">Total de comboios suprimidos nos últimos dias: {this.state.totalSuppressed}</h2>
+          </Container>
+        </Jumbotron>
+
         <Container>
           <Row>
             <Col xs={12}>
