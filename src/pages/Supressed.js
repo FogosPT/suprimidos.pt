@@ -47,8 +47,8 @@ class Supressed extends Component {
                   <Col key={idx} md="4">
                     <Card key={idx}>
                       <Card.Body>
-                        <h4>{train.begin} <span className="text-small">({train.startTime})</span></h4>
-                        <h4>{train.end} <span className="text-small">({train.endTime})</span></h4>
+                        <h4>{train.begin} {train.startTime && <span className="text-small">({train.startTime})</span>}</h4>
+                        <h4>{train.end} {train.endTime && <span className="text-small">({train.endTime})</span>}</h4>
                         <p>{train.line} - {train.type} - {train.vendor}</p>
                         <p>{moment.unix(train.timestamp).fromNow()}</p>
                       </Card.Body>
