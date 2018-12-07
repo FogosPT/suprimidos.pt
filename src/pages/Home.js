@@ -25,8 +25,6 @@ class Home extends Component {
     for (let location of Loc.locations) {
       this.props.actions.getLastSuppressedByLocation(location.key)
       this.props.actions.getLastWeeksSuppressedByLocation(location.key)
-
-      console.log(this.props.allSuppressedContent[`fetchedLastSuppressedIn${location.key}`])
     }
   }
 

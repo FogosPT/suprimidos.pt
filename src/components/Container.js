@@ -8,6 +8,14 @@ import Delays from "../pages/Delays"
 import Notifications from "../pages/Notifications"
 import Supressed from "../pages/Supressed"
 
+function logPageView() {
+  if ("ga" in window) {
+    var tracker = window.ga.getAll()[0];
+    if (tracker)
+        tracker.send("pageview");
+  }
+}
+
 function Container({ location }) {
   return (
     <Wrapper>
@@ -19,12 +27,11 @@ function Container({ location }) {
         >
           <section className="main route-section">
             <Switch location={location}>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Home} onUpdate={logPageView()} />
               <Route exact path="/suprimidos" component={Home} />
               <Route path="/suprimidos/:location" component={Supressed} />
               <Route path="/notificacoes" component={Notifications} />
               <Route path="/atrasos" component={Delays} />
-
             </Switch>
           </section>
         </CSSTransition>
