@@ -12,16 +12,6 @@ import configureStore from './store/configureStore'
 //Middlware with logger
 const store = configureStore()
 
-function logPageView() {
-  console.log('ageview')
-  if ("ga" in window) {
-    var tracker = window.ga.getAll()[0];
-    if (tracker)
-        tracker.send("pageview");
-  }
-
-}
-
 ReactDOM.render((
   <Provider store={store}>
     <Router>

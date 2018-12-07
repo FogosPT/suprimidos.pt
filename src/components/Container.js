@@ -7,12 +7,13 @@ import Home from "../pages/Home"
 import Delays from "../pages/Delays"
 import Notifications from "../pages/Notifications"
 import Supressed from "../pages/Supressed"
+import About from "../pages/About"
 
 function logPageView() {
   if ("ga" in window) {
-    var tracker = window.ga.getAll()[0];
+    var tracker = window.ga.getAll()[0]
     if (tracker)
-        tracker.send("pageview");
+        tracker.send("pageview")
   }
 }
 
@@ -32,6 +33,7 @@ function Container({ location }) {
               <Route path="/suprimidos/:location" component={Supressed} />
               <Route path="/notificacoes" component={Notifications} />
               <Route path="/atrasos" component={Delays} />
+              <Route path="/sobre" component={About} />
             </Switch>
           </section>
         </CSSTransition>
