@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as suppressedActions from '../actions/suppressedActions'
 import Loc from '../locations.json'
+import LocBoat from '../locations-boats.json'
 
 class Home extends Component {
 
@@ -25,6 +26,12 @@ class Home extends Component {
     for (let location of Loc.locations) {
       this.props.actions.getLastSuppressedByLocation(location.key)
       this.props.actions.getLastWeeksSuppressedByLocation(location.key)
+    }
+
+    this.props.actions.getLastBoatSuppressed()
+    for (let location of LocBoat.locations) {
+      this.props.actions.getLastBoatSuppressedByLocation(location.key)
+      this.props.actions.getLastBoatWeeksSuppressedByLocation(location.key)
     }
   }
 
@@ -46,8 +53,23 @@ class Home extends Component {
       }
     }
 
-    if( !missing && !this.state.totalSuppressed){
-       this.setState({...this.state, totalSuppressed: total})
+    let totalBoat = 0
+    let missingBoat = false
+    for (let location of LocBoat.locations) {
+      
+      let dataBoat = this.props.allBoatSuppressedContent[`fetchedLastBoatWeeksSuppressedIn${location.key}`]
+      
+      if(typeof dataBoat === 'undefined'){
+        missingBoat = true
+      } else {
+        for(let i in dataBoat){
+          totalBoat += dataBoat[i].count
+        }
+      }
+    }
+
+    if( !missing && !this.state.totalSuppressed && !missingBoat && !this.state.totalBoatSuppressed){
+       this.setState({...this.state, totalSuppressed: total, totalBoatSuppressed: totalBoat})
     }
   }
 
@@ -92,16 +114,38 @@ class Home extends Component {
     return allLines
   }
 
-  renderLine(location, content) {
-    return (
-      <tr key={location.key}>
-        <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-train"></i> {location.value}</Link></td>
-        <td>{moment.unix(content.timestamp).fromNow()}</td>
-        <td>{content.type}</td>
-        <td>{content.vendor}</td>
-        <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-link"></i></Link></td>
-      </tr>
-    )
+  handleBoatLines() {
+    let allBoatLines = []
+    for (let location of LocBoat.locations) {
+      console.log(this.props) 
+      if (this.props.allBoatSuppressedContent[`fetchedLastBoatSuppressedIn${location.key}`]) {
+        allBoatLines = [...allBoatLines, this.renderLine(location, this.props.allBoatSuppressedContent[`fetchedLastBoatSuppressedIn${location.key}`], true)]
+      }
+    }
+    return allBoatLines
+  }
+
+  renderLine(location, content, boats = false) {
+    if(boats){
+      return (
+        <tr key={location.key}>
+          <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-ship"></i> {location.value}</Link></td>
+          <td>{moment.unix(content.timestamp).fromNow()}</td>
+          <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-link"></i></Link></td>
+        </tr>
+      )
+    } else {
+      return (
+        <tr key={location.key}>
+          <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-train"></i> {location.value}</Link></td>
+          <td>{moment.unix(content.timestamp).fromNow()}</td>
+          <td>{content.type}</td>
+          <td>{content.vendor}</td>
+          <td><Link to={`/suprimidos/${location.key}`}><i className="fas fa-link"></i></Link></td>
+        </tr>
+      )
+    }
+    
   }
 
   handleLinesWeeks() {
@@ -113,6 +157,17 @@ class Home extends Component {
     }
     return allLines
   }
+
+  handleLinesBoatWeeks() {
+    let allBoatLines = []
+    for (let location of LocBoat.locations) {
+      if (this.props.allBoatSuppressedContent[`fetchedLastBoatWeeksSuppressedIn${location.key}`]) {
+        allBoatLines = [...allBoatLines, this.renderLineWeeks(location, this.props.allBoatSuppressedContent[`fetchedLastBoatWeeksSuppressedIn${location.key}`])]
+      }
+    }
+    return allBoatLines
+  }
+
 
   renderLineWeeks(location, content) {
     return (
@@ -224,6 +279,84 @@ class Home extends Component {
             </Col>
           </Row>
         </Container>
+
+        <Jumbotron fluid>
+          <Container>
+            <h1 className="text-center">O último barco suprimido foi {prefixString}
+              {numberValue && <CountUp
+                start={0}
+                end={numberValue}
+                duration={3}
+                delay={0.5}
+              />}
+              {SufixString}
+            </h1>
+          </Container>
+        </Jumbotron>
+        <Container>
+          <Row>
+            <Col xs={12}>
+              <Card>
+                <Card.Body className="text-center">
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>Terminal</th>
+                        <th>Último Suprimido</th>
+                        <th>Ver todos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.handleBoatLines()}
+                    </tbody>
+                  </Table>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+
+        <Jumbotron fluid className="mt-5">
+          <Container>
+          <h2 className="text-center">Total de barcos suprimidos nos últimos dias: {this.state.totalBoatSuppressed}</h2>
+          </Container>
+        </Jumbotron>
+
+        <Container>
+          <Row>
+            <Col xs={12}>
+              <Card>
+                <Card.Body className="text-center">
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>Linha / Dia</th>
+                        <th>{moment().subtract(14, 'day').format('D')}</th>
+                        <th>{moment().subtract(13, 'day').format('D')}</th>
+                        <th>{moment().subtract(12, 'day').format('D')}</th>
+                        <th>{moment().subtract(11, 'day').format('D')}</th>
+                        <th>{moment().subtract(10, 'day').format('D')}</th>
+                        <th>{moment().subtract(9, 'day').format('D')}</th>
+                        <th>{moment().subtract(8, 'day').format('D')}</th>
+                        <th>{moment().subtract(7, 'day').format('D')}</th>
+                        <th>{moment().subtract(6, 'day').format('D')}</th>
+                        <th>{moment().subtract(5, 'day').format('D')}</th>
+                        <th>{moment().subtract(4, 'day').format('D')}</th>
+                        <th>{moment().subtract(3, 'day').format('D')}</th>
+                        <th>{moment().subtract(2, 'day').format('D')}</th>
+                        <th>{moment().subtract(1, 'day').format('D')}</th>
+                        <th>{moment().format('D')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.handleLinesBoatWeeks()}
+                    </tbody>
+                  </Table>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
     )
   }
@@ -238,6 +371,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     allSuppressedContent: state.suppressedReducer,
+    allBoatSuppressedContent: state.suppressedReducer,
   }
 }
 

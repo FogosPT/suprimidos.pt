@@ -1,0 +1,40 @@
+{
+    "locations": [
+      {
+        "key": "barreiro",
+        "value": "Barreiro"
+      },
+      {
+        "key": "belem",
+        "value": "Belém"
+      },
+      {
+        "key": "cacilhas",
+        "value": "Cacilhas"
+      },
+      {
+        "key": "caisDoSodre",
+        "value": "Cais do Sodré"
+      },
+      {
+        "key": "montijo",
+        "value": "Montijo"
+      },
+      {
+        "key": "brandao",
+        "value": "Brandão"
+      },
+      {
+        "key": "seixal",
+        "value": "Seixal"
+      },
+      {
+        "key": "terreiroDoPaco",
+        "value": "Terreiro do Paço"
+      },
+      {
+        "key": "trafaria",
+        "value": "Trafaria"
+      }
+    ]
+  }

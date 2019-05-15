@@ -18,6 +18,24 @@ class contentApi {
     })
   }
 
+  static lastBoatSuppressed() {
+    const request = new Request('https://api.suprimidos.pt/data.php?last=1', {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      })
+    })
+    return fetch(request).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      return response.json().then(response => { throw (response) })
+    }).catch(error => {
+      throw (error)
+    })
+  }
+
   static lastDelayed() {
     const request = new Request('https://api.suprimidos.pt/data.php?delay=1', {
       method: 'GET',
@@ -37,6 +55,24 @@ class contentApi {
   }
 
   static lastSuppressedByLocation(location) {
+    const request = new Request(`https://api.suprimidos.pt/data.php?line=${location}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      })
+    })
+    return fetch(request).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      return response.json().then(response => { throw (response) })
+    }).catch(error => {
+      throw (error)
+    })
+  }
+
+  static lastBoatSuppressedByLocation(location) {
     const request = new Request(`https://api.suprimidos.pt/data.php?line=${location}`, {
       method: 'GET',
       headers: new Headers({
@@ -90,7 +126,43 @@ class contentApi {
     })
   }
 
+  static lastBoatSuppressedLastWeeksByLocation(location) {
+    const request = new Request(`https://api.suprimidos.pt/data.php?lineWeek=${location}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      })
+    })
+    return fetch(request).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      return response.json().then(response => { throw (response) })
+    }).catch(error => {
+      throw (error)
+    })
+  }
+
   static allSuppressedByLocation(location) {
+    const request = new Request(`https://api.suprimidos.pt/data.php?lineLast=${location}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      })
+    })
+    return fetch(request).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      return response.json().then(response => { throw (response) })
+    }).catch(error => {
+      throw (error)
+    })
+  }
+
+  static allBoatSuppressedByLocation(location) {
     const request = new Request(`https://api.suprimidos.pt/data.php?lineLast=${location}`, {
       method: 'GET',
       headers: new Headers({

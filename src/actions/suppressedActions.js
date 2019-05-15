@@ -35,6 +35,41 @@ export function getLastSuppressed() {
 
 /** ------------------------------------- */
 
+export function fetchingLastBoatSuppressed() {
+  return {
+    type: types.FETCHING_LAST_BOAT_SUPPRESSED
+  }
+}
+
+export function errorFetchingLastBoatSuppressed(error) {
+  return {
+    type: types.ERROR_FETCHING_LAST_BOAT_SUPPRESSED,
+    error
+  }
+}
+
+export function fetchedLastBoatSuppressed(response) {
+  return {
+    type: types.FETCHED_LAST_BOAT_SUPPRESSED,
+    response
+  }
+}
+
+export function getLastBoatSuppressed() {
+  return dispatch => {
+    dispatch(fetchingLastBoatSuppressed())
+    return contentApi.lastBoatSuppressed().then(response => {
+      dispatch(fetchedLastBoatSuppressed(response))
+    }).catch(error => {
+      dispatch(errorFetchingLastBoatSuppressed(error))
+      throw (error)
+    })
+  }
+}
+
+/** ------------------------------------- */
+
+
 export function fetchingLastSuppressedByLocation(location) {
   return {
     type: types.FETCHING_LAST_SUPPRESSED_BY_LOCATION,
@@ -65,6 +100,43 @@ export function getLastSuppressedByLocation(location) {
       dispatch(fetchedLastSuppressedByLocation(response, location))
     }).catch(error => {
       dispatch(errorFetchingLastSuppressedByLocation(error, location))
+      throw (error)
+    })
+  }
+}
+
+/** ------------------------------------- */
+
+export function fetchingLastBoatSuppressedByLocation(location) {
+  return {
+    type: types.FETCHING_LAST_BOAT_SUPPRESSED_BY_LOCATION,
+    location
+  }
+}
+
+export function errorFetchingLastBoatSuppressedByLocation(error, location) {
+  return {
+    type: types.ERROR_FETCHING_LAST_BOAT_SUPPRESSED_BY_LOCATION,
+    error,
+    location
+  }
+}
+
+export function fetchedLastBoatSuppressedByLocation(response, location) {
+  return {
+    type: types.FETCHED_LAST_BOAT_SUPPRESSED_BY_LOCATION,
+    location,
+    response
+  }
+}
+
+export function getLastBoatSuppressedByLocation(location) {
+  return dispatch => {
+    dispatch(fetchingLastBoatSuppressedByLocation(location))
+    return contentApi.lastBoatSuppressedByLocation(location).then(response => {
+      dispatch(fetchedLastBoatSuppressedByLocation(response, location))
+    }).catch(error => {
+      dispatch(errorFetchingLastBoatSuppressedByLocation(error, location))
       throw (error)
     })
   }
@@ -146,12 +218,94 @@ export function getAllSuppressedByLocation(location) {
 
 export function clearAllSuppressedByLocation() {
   return {
-    type: types.CLEAR_ALL_SUPPRESSED_BY_LOCATION
+    type: types.CLEAR_ALL_BOAT_SUPPRESSED_BY_LOCATION
   }
 }
 
 export function cleanAllSupressedByLocation() {
   return dispatch => {
     dispatch(clearAllSuppressedByLocation())
+  }
+}
+
+export function fetchingAllBoatSuppressedByLocation(location) {
+  return {
+    type: types.FETCHING_ALL_BOAT_SUPPRESSED_BY_LOCATION,
+    location
+  }
+}
+
+export function errorFetchingAllBoatSuppressedByLocation(error, location) {
+  return {
+    type: types.ERROR_FETCHING_ALL_BOAT_SUPPRESSED_BY_LOCATION,
+    error,
+    location
+  }
+}
+
+export function fetchedAllBoatSuppressedByLocation(response, location) {
+  return {
+    type: types.FETCHED_ALL_BOAT_SUPPRESSED_BY_LOCATION,
+    location,
+    response
+  }
+}
+
+export function getAllBoatSuppressedByLocation(location) {
+  return dispatch => {
+    dispatch(fetchingAllBoatSuppressedByLocation(location))
+    return contentApi.allBoatSuppressedByLocation(location).then(response => {
+      dispatch(fetchedAllBoatSuppressedByLocation(response, location))
+    }).catch(error => {
+      dispatch(errorFetchingAllBoatSuppressedByLocation(error, location))
+      throw (error)
+    })
+  }
+}
+
+export function clearAllBoatSuppressedByLocation() {
+  return {
+    type: types.CLEAR_ALL_BOAT_SUPPRESSED_BY_LOCATION
+  }
+}
+
+export function cleanAllBoatSupressedByLocation() {
+  return dispatch => {
+    dispatch(clearAllBoatSuppressedByLocation())
+  }
+}
+
+export function fetchingLastBoatWeeksSuppressedByLocation(location) {
+  return {
+    type: types.FETCHING_LAST_BOAT_WEEKS_SUPPRESSED_BY_LOCATION,
+    location
+  }
+}
+
+export function errorFetchingLastBoatWeeksSuppressedByLocation(error, location) {
+  return {
+    type: types.ERROR_FETCHING_LAST_BOAT_WEEKS_SUPPRESSED_BY_LOCATION,
+    error,
+    location
+  }
+}
+
+export function fetchedLastBoatWeeksSuppressedByLocation(response, location) {
+  return {
+    type: types.FETCHED_LAST_BOAT_WEEKS_SUPPRESSED_BY_LOCATION,
+    location,
+    response
+  }
+}
+
+export function getLastBoatWeeksSuppressedByLocation(location) {
+  return dispatch => {
+    dispatch(fetchingLastBoatWeeksSuppressedByLocation(location))
+    return contentApi.lastBoatSuppressedLastWeeksByLocation(location).then(response => {
+      dispatch(fetchedLastBoatWeeksSuppressedByLocation(response, location))
+    }).catch(error => {
+      dispatch(errorFetchingLastBoatWeeksSuppressedByLocation(error, location))
+      throw (error)
+    })
   }
 }
