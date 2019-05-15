@@ -184,7 +184,7 @@ class Notifications extends Component {
 
   sendEvent(line) {
     if (window.ga) {
-      if ("ga" in window) {
+      if ("ga" in window && typeof window.ga.getAll === "function") {
         var tracker = window.ga.getAll()[0];
         if (tracker)
           tracker.send("event", line, '1', "click", '2');
