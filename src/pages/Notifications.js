@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Toggle from 'react-toggle'
 import { Container, Row, Jumbotron } from 'react-bootstrap'
 import Loc from '../locations.json'
+import LocBoat from '../locations-boats.json'
 import firebase from "firebase";
 
 class Notifications extends Component {
@@ -134,7 +135,7 @@ class Notifications extends Component {
         allNotifications = [...allNotifications, this.renderToggle(location)]
       }
 
-      allNotifications = [...allNotifications, this.renderNotificationTroubleshoting()]
+      allNotifications = [...allNotifications]
       return allNotifications
     }
 
@@ -142,7 +143,7 @@ class Notifications extends Component {
       <div className="no-auth is-supported">
         <div className="row">
           <div className="col-12">
-            <p className="text-center">Para receber notificações de novos comboios suprimidos, clique no
+            <p className="text-center">Para receber notificações de novos comboios ou barcos suprimidos, clique no
                   botão ao lado para iniciar a autorização.</p>
           </div>
           <div className="col-12">
@@ -155,6 +156,44 @@ class Notifications extends Component {
       </div>
     )
   }
+
+  renderBoatsHeader() {
+    return(
+      <h1>Barcos</h1>
+    )
+  }
+
+  handleBoatNotifications() {
+    let tokenFB = localStorage.getItem('tokenFB')
+
+    if (tokenFB) {
+      let allBoatNotifications = [this.renderBoatsHeader()]
+      for (let location of LocBoat.locations) {
+        allBoatNotifications = [...allBoatNotifications, this.renderToggle(location)]
+      }
+
+      allBoatNotifications = [...allBoatNotifications, this.renderNotificationTroubleshoting()]
+      return allBoatNotifications
+    }
+
+    return (
+      <div className="no-auth is-supported">
+        <div className="row">
+          <div className="col-12">
+            <p className="text-center">Para receber notificações de novos comboios ou barcos suprimidos, clique no
+                  botão ao lado para iniciar a autorização.</p>
+          </div>
+          <div className="col-12">
+            <button onClick={() => { this.startFirebase() }} type="button"
+              className="btn btn-outline-success btn-lg btn-block">Quero
+          receber notificações.
+              </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
 
   startFirebase() {
     let config = {
@@ -179,7 +218,7 @@ class Notifications extends Component {
       return this.renderNotificationNotSupported();
     }
 
-    return this.handleNotifications()
+    return [ this.handleNotifications(), this.handleBoatNotifications()]
   }
 
   sendEvent(line) {
