@@ -15,9 +15,7 @@ class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      totalSuppressed: 0,
-    }
+    this.state = { totalSuppressed: 0, totalBoatSuppressed: 0, fetchedContent: false }
   }
 
   componentWillMount() {
@@ -68,8 +66,13 @@ class Home extends Component {
       }
     }
 
-    if( !missing && !this.state.totalSuppressed && !missingBoat && !this.state.totalBoatSuppressed){
-       this.setState({...this.state, totalSuppressed: total, totalBoatSuppressed: totalBoat})
+    if (!this.state.fetchedContent && !missing && !this.state.totalSuppressed && !missingBoat && !this.state.totalBoatSuppressed) {
+      this.setState({
+        ...this.state,
+        totalSuppressed: total,
+        totalBoatSuppressed: totalBoat,
+        fetchedContent: true,
+      })
     }
   }
 
@@ -117,7 +120,6 @@ class Home extends Component {
   handleBoatLines() {
     let allBoatLines = []
     for (let location of LocBoat.locations) {
-      console.log(this.props) 
       if (this.props.allBoatSuppressedContent[`fetchedLastBoatSuppressedIn${location.key}`]) {
         allBoatLines = [...allBoatLines, this.renderLine(location, this.props.allBoatSuppressedContent[`fetchedLastBoatSuppressedIn${location.key}`], true)]
       }
